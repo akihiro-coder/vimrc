@@ -165,7 +165,7 @@ map  W <Plug>(easymotion-bd-w)
 nmap W <Plug>(easymotion-overwin-w)
 nmap S <Plug>(easymotion-overwin-f2)
 
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <S-n> :NERDTreeToggle<CR>
 
 nmap <S-w> <C-w><C-w>
 
@@ -210,3 +210,4 @@ autocmd vimenter * ++nested colorscheme gruvbox
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
+autocmd VimEnter * execute 'NERDTree'
