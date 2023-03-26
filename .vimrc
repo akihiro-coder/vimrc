@@ -45,12 +45,27 @@ call dein#add('ervandew/supertab')
 call dein#add('skanehira/preview-markdown.vim')
 
 
+" git on vim
+call dein#add('tpope/vim-fugitive')
+
+" search code
+call dein#add('jremmen/vim-ripgrep')
+
+" commentary
+call dein#add('tpope/vim-commentary')
+
+" fussy finder
+call dein#add('ctrlpvim/ctrlp.vim')
+
+" easy resizing of vim windows
+call dein#add('simeji/winresizer')
+
 
 
 " Required:
 call dein#end()
 
-" Required:
+" Required: filetype plugin indent on
 filetype plugin indent on
 syntax enable
 
@@ -189,10 +204,10 @@ nmap <S-w> <C-w><C-w>
 "
 "
 "" スペースd でタッチパッド無効化 (normal mode)                                                                                  
-"nnoremap <space>d :<C-u>!xinput disable 13<cr><esc>
+nnoremap <space>d :<C-u>!xinput disable 12<cr><esc>
 "
 ""スペースe でタッチパッド有効化 (normal mode)                                
-"nnoremap <space>e :<C-u>!xinput enable 13<cr><esc>  
+nnoremap <space>e :<C-u>!xinput enable 12<cr><esc>  
 
 
 
@@ -210,4 +225,37 @@ autocmd vimenter * ++nested colorscheme gruvbox
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
-autocmd VimEnter * execute 'NERDTree'
+" autocmd VimEnter * execute 'NERDTree'
+
+
+
+
+" snippets setting
+" https://github.com/Shougo/neosnippet.vim#configuration
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
+
+
+" winresizer setting 
+let g:winresizer_vert_resize = 1
+let g:winresizer_horiz_resize = 1
