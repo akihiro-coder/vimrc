@@ -180,7 +180,7 @@ map  W <Plug>(easymotion-bd-w)
 nmap W <Plug>(easymotion-overwin-w)
 nmap S <Plug>(easymotion-overwin-f2)
 
-nnoremap <S-n> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
 
 nmap <S-w> <C-w><C-w>
 
@@ -259,3 +259,6 @@ let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 " winresizer setting 
 let g:winresizer_vert_resize = 1
 let g:winresizer_horiz_resize = 1
+
+" キーワードにマッチした数を表示
+set shortmess-=S
