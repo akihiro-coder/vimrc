@@ -347,6 +347,15 @@ endfunction
 let g:lsp_diagnostics_enabled = 0  " 警告やエラーの表示はALEに任せるのでOFFにする
 
 
+nnoremap ; :
+nnoremap : ;
+inoremap ; :
+inoremap : ;
+
+tnoremap <ESC> <C-w>N
+tnoremap <S-w> <C-w><C-w>
+
+
 
 nmap <C-l> w
 nmap <C-h> b
