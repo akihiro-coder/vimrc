@@ -22,14 +22,9 @@ call dein#add('neoclide/coc.nvim', { 'merged': 0, 'rev': 'release' })
 " snippets
 call dein#add('SirVer/ultisnips')
 
-
-
-
 " brackets complementation
 call dein#add('cohama/lexima.vim') " pep8 regulation checker 
 " call dein#add('andviro/flake8-vim')
-
-
 
 call dein#add('easymotion/vim-easymotion')
 call dein#add('preservim/nerdtree')
@@ -139,7 +134,7 @@ nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 
 
 " <F5>で編集中のファイルを実行
-nmap <F5> :!python3 %
+nnoremap <F5> :!python3 %
 
 
 
@@ -172,10 +167,8 @@ autocmd FileType python nnoremap <S-f> :call Autopep8()<CR>
 
 
 
-" shift + h -> start
-" shift + l -> end
-noremap <S-h> 0
-noremap <S-l> $
+noremap <C-h> 0
+noremap <C-l> $
  
  
 map  W <Plug>(easymotion-bd-w)
@@ -313,3 +306,11 @@ let g:UltiSnipsSnippetDirectories='~/.vim/UltiSnips/'
 
 
 let g:coc_disable_startup_warning = 1
+
+
+nnoremap <C-g> <S-g>
+
+"スペースhでHover
+nmap <silent> <space>h :<C-u>call CocAction('doHover')<cr>
+"スペースdfでDefinition
+nmap <silent> <space>df <Plug>(coc-definition)
