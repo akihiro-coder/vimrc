@@ -159,7 +159,7 @@ endfunction
 function! Autopep8()
     call Preserve(':silent %!autopep8 --ignore=E501 -')
 endfunction
-autocmd FileType python nnoremap <S-f> :call Autopep8()<CR>
+autocmd FileType python nnoremap <C-f> :call Autopep8()<CR>
 
 
 
