@@ -44,9 +44,6 @@ call dein#add('jremmen/vim-ripgrep')
 " commentary
 call dein#add('tpope/vim-commentary')
 
-" fussy finder
-call dein#add('ctrlpvim/ctrlp.vim')
-
 " easy resizing of vim windows
 call dein#add('simeji/winresizer')
 
