@@ -204,12 +204,6 @@ nnoremap <space>e :<C-u>!xinput enable 12<cr><esc>
 
 
 
-" molokai colorscheme setting
-"syntax on
-"colorscheme molokai
-"set t_Co=256
-
-
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
@@ -297,7 +291,6 @@ inoremap ; :
 let g:coc_disable_startup_warning = 1
 
 
-nnoremap <C-g> <S-g>
 
 "スペースhでHover
 nmap <silent> <space>h :<C-u>call CocAction('doHover')<cr>
@@ -311,4 +304,4 @@ imap <C-l> <Plug>(coc-snippets-expand)
 
 " gruvbox
 set background=dark " or light if you want light mode
-colorscheme evening
+colorscheme wildcharm
