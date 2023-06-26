@@ -15,6 +15,9 @@ call dein#add('/home/akihiro/.cache/dein/repos/github.com/Shougo/dein.vim')
 
 " Add or remove your plugins here like this:
 
+" fussy finder
+call dein#add('nvim-lua/plenary.nvim')
+call dein#add('nvim-telescope/telescope.nvim', { 'rev': '0.1.1' })
 
 " complementation
 call dein#add('neoclide/coc.nvim', { 'merged': 0, 'rev': 'release' })
@@ -34,10 +37,6 @@ call dein#add('ervandew/supertab')
 
 " markdown preview
 call dein#add('skanehira/preview-markdown.vim')
-
-
-" git on vim
-call dein#add('tpope/vim-fugitive')
 
 " search code
 call dein#add('jremmen/vim-ripgrep')
@@ -305,3 +304,8 @@ imap <C-l> <Plug>(coc-snippets-expand)
 " gruvbox
 set background=dark " or light if you want light mode
 colorscheme wildcharm
+
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files hidden=true theme=get_dropdown<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep theme=get_dropdown<cr>
