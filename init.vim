@@ -106,10 +106,9 @@ set laststatus=2
 set virtualedit=onemore
 " コマンドラインモードでのtab補完機能
 set wildmenu
-" set vim color
-colorscheme default
 " esc key 二回押せばハイライトが消える
 nnoremap <ESC><ESC> :nohlsearch<CR>
+
 
 
 " カーソルを縦棒にする
@@ -272,14 +271,10 @@ endif
   set statusline+=%P    " ファイル内の何％の位置にあるか 
 
 
-
-nnoremap :files :Files
-nnoremap :ag :Ag
-
 nnoremap ; :
-nnoremap ; :
+nnoremap : ;
 inoremap ; :
-inoremap ; :
+inoremap : ;
 
 
 
@@ -298,11 +293,13 @@ nmap <silent> <space>df <Plug>(coc-definition)
 imap <C-l> <Plug>(coc-snippets-expand)
 
 
-" gruvbox
-set background=dark " or light if you want light mode
+set background=dark
 colorscheme wildcharm
 
 
-" Find files using Telescope command-line sugar.
+" fussy finder
 nnoremap <leader>ff <cmd>Telescope find_files hidden=true theme=get_dropdown<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep theme=get_dropdown<cr>
+
+
+inoremap <silent><expr> <Enter> coc#pum#visible() ? coc#pum#confirm() : "\<Enter>"
