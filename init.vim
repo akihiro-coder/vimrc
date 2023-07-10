@@ -15,6 +15,14 @@ call dein#add('/home/akihiro/.cache/dein/repos/github.com/Shougo/dein.vim')
 
 " Add or remove your plugins here like this:
 
+
+" vim status-bar modernization
+call dein#add('vim-airline/vim-airline')
+call dein#add('vim-airline/vim-airline-themes')
+
+" git on vim
+call dein#add('tpope/vim-fugitive')
+
 " fussy finder
 call dein#add('nvim-lua/plenary.nvim')
 call dein#add('nvim-telescope/telescope.nvim', { 'rev': '0.1.1' })
@@ -108,6 +116,8 @@ set virtualedit=onemore
 set wildmenu
 " esc key 二回押せばハイライトが消える
 nnoremap <ESC><ESC> :nohlsearch<CR>
+" time between insert and normal mode 
+set ttimeoutlen=10
 
 
 
@@ -243,32 +253,32 @@ set shortmess-=S
 
 
 " display git branch name in status line
-  set statusline=%<     " 行が長すぎるときに切り詰める位置
-  set statusline+=[%n]  " バッファ番号
-  set statusline+=%m    " %m 修正フラグ
-  set statusline+=%r    " %r 読み込み専用フラグ
-  set statusline+=%h    " %h ヘルプバッファフラグ
-  set statusline+=%w    " %w プレビューウィンドウフラグ
-  set statusline+=%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}  " fencとffを表示
-  set statusline+=%y    " バッファ内のファイルのタイプ
-  set statusline+=\     " 空白スペース
+set statusline=%<     " 行が長すぎるときに切り詰める位置
+set statusline+=[%n]  " バッファ番号
+set statusline+=%m    " %m 修正フラグ
+set statusline+=%r    " %r 読み込み専用フラグ
+set statusline+=%h    " %h ヘルプバッファフラグ
+set statusline+=%w    " %w プレビューウィンドウフラグ
+set statusline+=%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}  " fencとffを表示
+set statusline+=%y    " バッファ内のファイルのタイプ
+set statusline+=\     " 空白スペース
 if winwidth(0) >= 130
   set statusline+=%F    " バッファ内のファイルのフルパス
 else
   set statusline+=%t    " ファイル名のみ
 endif
-  set statusline+=%=    " 左寄せ項目と右寄せ項目の区切り
-  "set statusline+=%{fugitive#statusline()}  
-  set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''} " Gitのブランチ名を表示
-  set statusline+=\ \   " 空白スペース2個
-  set statusline+=%1l   " 何行目にカーソルがあるか
-  set statusline+=/
-  set statusline+=%L    " バッファ内の総行数
-  set statusline+=,
-  set statusline+=%c    " 何列目にカーソルがあるか
-  set statusline+=%V    " 画面上の何列目にカーソルがあるか
-  set statusline+=\ \   " 空白スペース2個
-  set statusline+=%P    " ファイル内の何％の位置にあるか 
+set statusline+=%=    " 左寄せ項目と右寄せ項目の区切り
+"set statusline+=%{fugitive#statusline()}  
+set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''} " Gitのブランチ名を表示
+set statusline+=\ \   " 空白スペース2個
+set statusline+=%1l   " 何行目にカーソルがあるか
+set statusline+=/
+set statusline+=%L    " バッファ内の総行数
+set statusline+=,
+set statusline+=%c    " 何列目にカーソルがあるか
+set statusline+=%V    " 画面上の何列目にカーソルがあるか
+set statusline+=\ \   " 空白スペース2個
+set statusline+=%P    " ファイル内の何％の位置にあるか 
 
 
 nnoremap ; :
@@ -283,10 +293,10 @@ let g:coc_disable_startup_warning = 1
 
 
 
-"スペースhでHover
-nmap <silent> <space>h :<C-u>call CocAction('doHover')<cr>
-"スペースdfでDefinition
-nmap <silent> <space>df <Plug>(coc-definition)
+"\hでHover
+nmap <silent> <leader>hh <C-u>call CocAction('doHover')<cr>
+"\dfで定義ジャンプ
+nmap <silent> <leader>df <Plug>(coc-definition)
 
 " coc-snippets
 " Use <C-l> for trigger snippet expand.
@@ -294,7 +304,7 @@ imap <C-l> <Plug>(coc-snippets-expand)
 
 
 set background=dark
-colorscheme wildcharm
+colorscheme gruvbox
 
 
 " fussy finder
@@ -302,4 +312,16 @@ nnoremap <leader>ff <cmd>Telescope find_files hidden=true theme=get_dropdown<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep theme=get_dropdown<cr>
 
 
+" enterで補完候補を選択できるように
 inoremap <silent><expr> <Enter> coc#pum#visible() ? coc#pum#confirm() : "\<Enter>"
+
+
+" vim-airline settings
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme = 'wombat'
+nmap <S-h> <Plug>AirlineSelectPrevTab
+nmap <S-l> <Plug>AirlineSelectNextTab
+let g:airline#extensions#default#layout = [
+	\ [ 'z', 'y', 'x' ],
+	\ [ 'c', 'b', 'a', 'error', 'warning']
+	\ ]
