@@ -16,6 +16,9 @@ call dein#add('/home/akihiro/.cache/dein/repos/github.com/Shougo/dein.vim')
 " Add or remove your plugins here like this:
 
 
+" terminal window in vim 
+call dein#add('voldikss/vim-floaterm')
+
 " vim status-bar modernization
 call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
@@ -23,7 +26,7 @@ call dein#add('vim-airline/vim-airline-themes')
 " git on vim
 call dein#add('tpope/vim-fugitive')
 
-" fussy finder
+" fussy searching
 call dein#add('nvim-lua/plenary.nvim')
 call dein#add('nvim-telescope/telescope.nvim', { 'rev': '0.1.1' })
 
@@ -325,3 +328,10 @@ let g:airline#extensions#default#layout = [
 	\ [ 'z', 'y', 'x' ],
 	\ [ 'c', 'b', 'a', 'error', 'warning']
 	\ ]
+
+
+" Configuration example
+let g:floaterm_keymap_new    = '<F7>'
+let g:floaterm_keymap_prev   = '<F8>'
+let g:floaterm_keymap_next   = '<F9>'
+let g:floaterm_keymap_toggle = '<F12>'
