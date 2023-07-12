@@ -175,14 +175,17 @@ autocmd FileType python nnoremap <C-f> :call Autopep8()<CR>
 noremap <C-h> 0
 noremap <C-l> $
  
- 
-map  W <Plug>(easymotion-bd-w)
-nmap W <Plug>(easymotion-overwin-w)
-nmap S <Plug>(easymotion-overwin-f2)
+" easymotion settings
+" s{char}{char} to move to {char}{char}
+map <leader>s <Plug>(easymotion-bd-f2)
+nmap <leader>s <Plug>(easymotion-overwin-f2)
+" Move to line
+map <leader>l <Plug>(easymotion-bd-jk)
+nmap <leader>l <Plug>(easymotion-overwin-line)
 
 nnoremap <C-n> :NERDTreeToggle<CR>
 
-nmap <S-w> <C-w><C-w>
+nmap <leader>w <C-w><C-w>
 
 
 
