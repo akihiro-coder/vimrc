@@ -15,6 +15,11 @@ call dein#add('/home/akihiro/.cache/dein/repos/github.com/Shougo/dein.vim')
 
 " Add or remove your plugins here like this:
 
+" indent blankline
+call dein#add('lukas-reineke/indent-blankline.nvim')
+
+" tokyonight colorscheme
+call dein#add("folke/tokyonight.nvim")
 
 " terminal window in vim 
 call dein#add('voldikss/vim-floaterm')
@@ -190,23 +195,6 @@ nmap <leader>w <C-w><C-w>
 
 
 
-
-"" vim起動時にタッチパッド無効化                                                                  
-"augroup entercmd                                                                    
-"  autocmd!                                                                          
-"  autocmd VimEnter * silent !xinput disable 13
-"augroup END                                                                         
-"
-"" vim終了時にタッチパッド有効化                                                                       
-"augroup quitcmd                                                                     
-"  autocmd!                                                                          
-"  autocmd VimLeave * !xinput enable 13                                      
-"augroup END                                                                         
-"
-"
-"
-"
-"" スペースd でタッチパッド無効化 (normal mode)                                                                                  
 nnoremap <space>d :<C-u>!xinput disable 12<cr><esc>
 "
 ""スペースe でタッチパッド有効化 (normal mode)                                
@@ -222,30 +210,6 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 
 
 
-
-"" snippets setting
-"" https://github.com/Shougo/neosnippet.vim#configuration
-"" Plugin key-mappings.
-"" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-"" SuperTab like snippets behavior.
-"" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-""imap <expr><TAB>
-"" \ pumvisible() ? "\<C-n>" :
-"" \ neosnippet#expandable_or_jumpable() ?
-"" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-"" For conceal markers.
-"if has('conceal')
-"  set conceallevel=2 concealcursor=niv
-"endif
-
-"let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
 
 
@@ -310,7 +274,7 @@ imap <C-l> <Plug>(coc-snippets-expand)
 
 
 set background=dark
-colorscheme gruvbox
+colorscheme tokyonight-night
 
 
 " fussy finder
@@ -333,7 +297,7 @@ let g:airline#extensions#default#layout = [
 	\ ]
 
 
-" Configuration example
+" froaterm Configuration
 let g:floaterm_keymap_new    = '<F7>'
 let g:floaterm_keymap_prev   = '<F8>'
 let g:floaterm_keymap_next   = '<F9>'
