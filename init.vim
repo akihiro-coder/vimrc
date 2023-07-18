@@ -1,90 +1,66 @@
-"dein Scripts-----------------------------
-if &compatible
-  set nocompatible               " Be iMproved
-endif
+call plug#begin()
 
-" Required:
-set runtimepath+=/home/akihiro/.cache/dein/repos/github.com/Shougo/dein.vim
-
-" Required:
-call dein#begin('/home/akihiro/.cache/dein')
-
-" Let dein manage dein
-" Required:
-call dein#add('/home/akihiro/.cache/dein/repos/github.com/Shougo/dein.vim')
-
-" Add or remove your plugins here like this:
+" syntax plugin
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " indent blankline
-call dein#add('lukas-reineke/indent-blankline.nvim')
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 " tokyonight colorscheme
-call dein#add("folke/tokyonight.nvim")
+Plug 'folke/tokyonight.nvim'
 
 " terminal window in vim 
-call dein#add('voldikss/vim-floaterm')
+Plug 'voldikss/vim-floaterm'
 
 " vim status-bar modernization
-call dein#add('vim-airline/vim-airline')
-call dein#add('vim-airline/vim-airline-themes')
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " git on vim
-call dein#add('tpope/vim-fugitive')
+Plug 'tpope/vim-fugitive'
 
 " fussy searching
-call dein#add('nvim-lua/plenary.nvim')
-call dein#add('nvim-telescope/telescope.nvim', { 'rev': '0.1.1' })
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'rev': '0.1.2' }
+
 
 " complementation
-call dein#add('neoclide/coc.nvim', { 'merged': 0, 'rev': 'release' })
+" Plug 'neoclide/coc.nvim', { 'merged': 0, 'rev': 'release' }
+Plug 'neoclide/coc.nvim', { 'branch': 'release'}
 
 " brackets complementation
-call dein#add('itmammoth/doorboy.vim')
+Plug 'itmammoth/doorboy.vim'
 
-call dein#add('easymotion/vim-easymotion')
-call dein#add('preservim/nerdtree')
+" fast move on code
+Plug 'easymotion/vim-easymotion'
 
-" vim theme 'gruvbox'
-" call dein#add('morhetz/gruvbox')
-call dein#add('ellisonleao/gruvbox.nvim')
+" filer 
+Plug 'preservim/nerdtree'
+
+" colorscheme
+Plug 'ellisonleao/gruvbox.nvim'
 
 " tab complementation
-call dein#add('ervandew/supertab')
+Plug 'ervandew/supertab'
 
 " markdown preview
-call dein#add('skanehira/preview-markdown.vim')
+Plug 'skanehira/preview-markdown.vim'
 
 " search code
-call dein#add('jremmen/vim-ripgrep')
+" call dein#add('jremmen/vim-ripgrep')
 
 " commentary
-call dein#add('tpope/vim-commentary')
+Plug 'tpope/vim-commentary'
 
 " easy resizing of vim windows
-call dein#add('simeji/winresizer')
+Plug 'simeji/winresizer'
 
-" fuzzy finder
-call dein#add('junegunn/fzf', {'build': './install --all'})
-call dein#add('junegunn/fzf.vim')
-
-
-" Required:
-call dein#end()
-
-" Required: filetype plugin indent on
-filetype plugin indent on
-syntax enable
-
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
-
-"End dein Scripts-------------------------
+" fuzzy finder (fussy searching)
+" call dein#add('junegunn/fzf', {'build': './install --all'})
+" call dein#add('junegunn/fzf.vim')
 
 
-
-
+call plug#end()
 
 
 
@@ -148,7 +124,6 @@ nnoremap <F5> :!python3 %
 
 
 
-"autopep8を<sift>+fで実行
 "pip install autopep8(下の記述の前に実行しておく)
 function! Preserve(command)
     " Save the last search.
@@ -293,7 +268,7 @@ nmap <S-h> <Plug>AirlineSelectPrevTab
 nmap <S-l> <Plug>AirlineSelectNextTab
 let g:airline#extensions#default#layout = [
 	\ [ 'z', 'y', 'x' ],
-	\ [ 'c', 'b', 'a', 'error', 'warning']
+	\ [ 'c', 'b', 'a']
 	\ ]
 
 
@@ -302,3 +277,15 @@ let g:floaterm_keymap_new    = '<F7>'
 let g:floaterm_keymap_prev   = '<F8>'
 let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F12>'
+
+
+
+
+" nvim-treesitter Configuration
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+  }
+}
+EOF
