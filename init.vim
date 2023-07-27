@@ -1,5 +1,10 @@
 call plug#begin()
 
+Plug 'sheerun/vim-polyglot'
+
+" colorscheme
+Plug 'sainnhe/gruvbox-material'
+
 " syntax plugin
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
@@ -248,11 +253,12 @@ nmap <silent> <leader>df <Plug>(coc-definition)
 imap <C-l> <Plug>(coc-snippets-expand)
 
 
-set background=dark
-colorscheme tokyonight-night
+" colorscheme settings
+" set background=dark
+" colorscheme tokyonight-night
 
 
-" fussy finder
+" fussy finder settings
 nnoremap <leader>ff <cmd>Telescope find_files hidden=true theme=get_dropdown<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep theme=get_dropdown<cr>
 
@@ -282,10 +288,13 @@ let g:floaterm_keymap_toggle = '<F12>'
 
 
 " nvim-treesitter Configuration
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-  }
-}
-EOF
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+"   highlight = {
+"     enable = true,
+"   }
+" }
+" EOF
+
+
+colorscheme gruvbox-material
