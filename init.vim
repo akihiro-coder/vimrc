@@ -157,8 +157,10 @@ autocmd FileType python nnoremap <C-f> :call Autopep8()<CR>
 
 
 
-noremap <C-h> 0
+noremap <C-h> ^
 noremap <C-l> $
+vnoremap <C-h> ^
+vnoremap <C-l> $
  
 " easymotion settings
 " s{char}{char} to move to {char}{char}
@@ -168,9 +170,13 @@ nmap <leader>s <Plug>(easymotion-overwin-f2)
 map <leader>l <Plug>(easymotion-bd-jk)
 nmap <leader>l <Plug>(easymotion-overwin-line)
 
+
+"nerdtree
 nnoremap <C-n> :NERDTreeToggle<CR>
 
-nmap <leader>w <C-w><C-w>
+
+" window change
+map <leader>w <C-w><C-w>
 
 
 
@@ -243,14 +249,23 @@ let g:coc_disable_startup_warning = 1
 
 
 
+"coc.nvim settings
 "\hでHover
 nmap <silent> <leader>hh <C-u>call CocAction('doHover')<cr>
 "\dfで定義ジャンプ
 nmap <silent> <leader>df <Plug>(coc-definition)
-
-" coc-snippets
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
+
+" Remap <C-f> and <C-b> to scroll float windows/popups
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
 
 
 " colorscheme settings
