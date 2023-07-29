@@ -312,4 +312,9 @@ let g:floaterm_keymap_toggle = '<F12>'
 " EOF
 
 
+" gruvbox-material settings
+let g:gruvbox_material_background = 'hard'
+let g:gruvbox_material_foreground = 'mix'
+let g:gruvbox_material_enable_bold = 1
+let gruvbox_material_ui_contrast = 'high'
 colorscheme gruvbox-material
