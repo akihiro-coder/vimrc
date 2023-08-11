@@ -28,9 +28,6 @@ Plug 'voldikss/vim-floaterm'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" git on vim
-Plug 'tpope/vim-fugitive'
-
 " fussy searching
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'rev': '0.1.2' }
@@ -324,9 +321,8 @@ let gruvbox_material_ui_contrast = 'high'
 colorscheme gruvbox-material
 
 
+" git.nvim settiings(default)
+lua require ('git').setup()
 
-" gitsigns settings (default)
+" gitsigns settings(default)
 lua require('gitsigns').setup()
-
-" git.nvim settings (default)
-lua require('git').require()
