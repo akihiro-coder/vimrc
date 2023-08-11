@@ -1,5 +1,12 @@
 call plug#begin()
 
+" git signs on neovim 
+Plug 'lewis6991/gitsigns.nvim'
+
+" git operation on neovim 
+Plug 'dinhhuy258/git.nvim'
+
+" vim highlight
 Plug 'sheerun/vim-polyglot'
 
 " colorscheme
@@ -268,9 +275,6 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
 endif
 
 
-" colorscheme settings
-" set background=dark
-" colorscheme tokyonight-night
 
 
 " fussy finder settings
@@ -284,12 +288,12 @@ inoremap <silent><expr> <Enter> coc#pum#visible() ? coc#pum#confirm() : "\<Enter
 
 " vim-airline settings
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = 'wombat'
+let g:airline_theme = 'murmur'
 nmap <S-h> <Plug>AirlineSelectPrevTab
 nmap <S-l> <Plug>AirlineSelectNextTab
 let g:airline#extensions#default#layout = [
 	\ [ 'z', 'y', 'x' ],
-	\ [ 'c', 'b', 'a']
+	\ [ 'c', 'a']
 	\ ]
 
 
@@ -318,3 +322,11 @@ let g:gruvbox_material_foreground = 'mix'
 let g:gruvbox_material_enable_bold = 1
 let gruvbox_material_ui_contrast = 'high'
 colorscheme gruvbox-material
+
+
+
+" gitsigns settings (default)
+lua require('gitsigns').setup()
+
+" git.nvim settings (default)
+lua require('git').require()
