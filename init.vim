@@ -1,16 +1,16 @@
 call plug#begin()
 
-" git signs on neovim 
+" preview uml
+Plug 'skanehira/preview-uml.vim'
+
+" git signs on neovim
 Plug 'lewis6991/gitsigns.nvim'
 
-" git operation on neovim 
+" git operation on neovim
 Plug 'dinhhuy258/git.nvim'
 
 " vim highlight
 Plug 'sheerun/vim-polyglot'
-
-" colorscheme
-Plug 'sainnhe/gruvbox-material'
 
 " syntax plugin
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -18,7 +18,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " indent blankline
 Plug 'lukas-reineke/indent-blankline.nvim'
 
-" tokyonight colorscheme
+" colorscheme
 Plug 'folke/tokyonight.nvim'
 
 " terminal window in vim 
@@ -27,6 +27,8 @@ Plug 'voldikss/vim-floaterm'
 " vim status-bar modernization
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+" Plug 'nvim-lualine/lualine.nvim'
+" Plug 'nvim-tree/nvim-web-devicons'
 
 " fussy searching
 Plug 'nvim-lua/plenary.nvim'
@@ -284,14 +286,11 @@ inoremap <silent><expr> <Enter> coc#pum#visible() ? coc#pum#confirm() : "\<Enter
 
 
 " vim-airline settings
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme = 'murmur'
 nmap <S-h> <Plug>AirlineSelectPrevTab
 nmap <S-l> <Plug>AirlineSelectNextTab
-let g:airline#extensions#default#layout = [
-	\ [ 'z', 'y', 'x' ],
-	\ [ 'c', 'a']
-	\ ]
 
 
 " froaterm Configuration
@@ -300,29 +299,7 @@ let g:floaterm_keymap_prev   = '<F8>'
 let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F12>'
 
+colorscheme tokyonight-night
 
-
-
-" nvim-treesitter Configuration
-" lua <<EOF
-" require'nvim-treesitter.configs'.setup {
-"   highlight = {
-"     enable = true,
-"   }
-" }
-" EOF
-
-
-" gruvbox-material settings
-let g:gruvbox_material_background = 'hard'
-let g:gruvbox_material_foreground = 'mix'
-let g:gruvbox_material_enable_bold = 1
-let gruvbox_material_ui_contrast = 'high'
-colorscheme gruvbox-material
-
-
-" git.nvim settiings(default)
-lua require ('git').setup()
-
-" gitsigns settings(default)
-lua require('gitsigns').setup()
+" set plantuml server url
+let g:preview_uml_url='http://localhost:8888'
