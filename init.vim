@@ -25,9 +25,9 @@ Plug 'folke/tokyonight.nvim'
 Plug 'voldikss/vim-floaterm'
 
 " vim status-bar modernization
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-" Plug 'nvim-lualine/lualine.nvim'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+Plug 'nvim-lualine/lualine.nvim'
 " Plug 'nvim-tree/nvim-web-devicons'
 
 " fussy searching
@@ -55,7 +55,8 @@ Plug 'ellisonleao/gruvbox.nvim'
 Plug 'ervandew/supertab'
 
 " markdown preview
-Plug 'skanehira/preview-markdown.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown']}
+
 
 " search code
 " call dein#add('jremmen/vim-ripgrep')
@@ -69,6 +70,10 @@ Plug 'simeji/winresizer'
 " fuzzy finder (fussy searching)
 " call dein#add('junegunn/fzf', {'build': './install --all'})
 " call dein#add('junegunn/fzf.vim')
+
+" noice
+Plug 'folke/noice.nvim'
+Plug 'MunifTanjim/nui.nvim'
 
 
 call plug#end()
@@ -285,12 +290,67 @@ nnoremap <leader>fg <cmd>Telescope live_grep theme=get_dropdown<cr>
 inoremap <silent><expr> <Enter> coc#pum#visible() ? coc#pum#confirm() : "\<Enter>"
 
 
-" vim-airline settings
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = 'murmur'
-nmap <S-h> <Plug>AirlineSelectPrevTab
-nmap <S-l> <Plug>AirlineSelectNextTab
+" vim-airline config
+" let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline_theme = 'murmur'
+" nmap <S-h> <Plug>AirlineSelectPrevTab
+" nmap <S-l> <Plug>AirlineSelectNextTab
+
+" lualine config
+lua << END
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'nightfly',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
+    ignore_focus = {},
+    always_divide_middle = true,
+    globalstatus = false,
+    refresh = {
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
+    }
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {{
+        'filename',
+        file_status=true,
+        path=2
+    }},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {}
+      },
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {}
+}
+END
 
 
 " froaterm Configuration
@@ -301,5 +361,25 @@ let g:floaterm_keymap_toggle = '<F12>'
 
 colorscheme tokyonight-night
 
-" set plantuml server url
+
+
+
+" set plantuml server url" In your init.lua or init.vim
 let g:preview_uml_url='http://localhost:8888'
+
+
+" markdownpreview config
+let g:mkdp_open_to_the_world = 1
+let g:mkdp_open_ip = '192.168.3.9' " change to you vps or vm ip
+let g:mkdp_port = 8080
+function! g:EchoUrl(url)
+    :echo a:url
+endfunction
+let g:mkdp_browserfunc = 'g:EchoUrl'
+
+
+
+" noice config
+lua << END
+require("noice").setup()
+END
