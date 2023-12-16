@@ -46,7 +46,9 @@ Plug 'itmammoth/doorboy.vim'
 Plug 'easymotion/vim-easymotion'
 
 " filer 
-Plug 'preservim/nerdtree'
+" Plug 'preservim/nerdtree'
+Plug 'nvim-tree/nvim-tree.lua'
+Plug 'nvim-tree/nvim-web-devicons'
 
 " colorscheme
 Plug 'ellisonleao/gruvbox.nvim'
@@ -183,7 +185,36 @@ nmap <leader>l <Plug>(easymotion-overwin-line)
 
 
 "nerdtree
-nnoremap <C-n> :NERDTreeToggle<CR>
+" nnoremap <C-n> :NERDTreeToggle<CR>
+" filer
+nnoremap <C-n> :NvimTreeOpen<CR>
+
+lua << END
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+
+-- OR setup with some options
+require("nvim-tree").setup({
+  sort = {
+    sorter = "case_sensitive",
+  },
+  view = {
+    width = 30,
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
+END
+
+
 
 
 " window change
@@ -338,14 +369,7 @@ require('lualine').setup {
     lualine_y = {},
     lualine_z = {}
   },
-  tabline = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {}
-      },
+  tabline = {},
   winbar = {},
   inactive_winbar = {},
   extensions = {}
