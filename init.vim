@@ -28,7 +28,6 @@ Plug 'voldikss/vim-floaterm'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 Plug 'nvim-lualine/lualine.nvim'
-" Plug 'nvim-tree/nvim-web-devicons'
 
 " fussy searching
 Plug 'nvim-lua/plenary.nvim'
@@ -73,9 +72,12 @@ Plug 'simeji/winresizer'
 " call dein#add('junegunn/fzf', {'build': './install --all'})
 " call dein#add('junegunn/fzf.vim')
 
-" noice
+" UI for messages, cmdline and the popupmenu
 Plug 'folke/noice.nvim'
 Plug 'MunifTanjim/nui.nvim'
+
+" bufferline
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
 
 call plug#end()
@@ -321,13 +323,6 @@ nnoremap <leader>fg <cmd>Telescope live_grep theme=get_dropdown<cr>
 inoremap <silent><expr> <Enter> coc#pum#visible() ? coc#pum#confirm() : "\<Enter>"
 
 
-" vim-airline config
-" let g:airline_powerline_fonts = 1
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline_theme = 'murmur'
-" nmap <S-h> <Plug>AirlineSelectPrevTab
-" nmap <S-l> <Plug>AirlineSelectNextTab
-
 " lualine config
 lua << END
 require('lualine').setup {
@@ -405,5 +400,26 @@ let g:mkdp_browserfunc = 'g:EchoUrl'
 
 " noice config
 lua << END
-require("noice").setup()
+require("noice").setup({
+  lsp = {
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true,
+    },
+  },
+  presets = {
+    bottom_search = false, -- use a classic bottom cmdline for search
+    command_palette = true, -- position the cmdline and popupmenu together
+    long_message_to_split = true, -- long messages will be sent to a split
+    inc_rename = false, -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false, -- add a border to hover docs and signature help
+  },
+})
+END
+
+
+" bufferline config
+lua << END
+require("bufferline").setup()
 END
