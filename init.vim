@@ -3,8 +3,7 @@ call plug#begin()
 " preview uml
 Plug 'skanehira/preview-uml.vim'
 
-" git signs on neovim
-Plug 'lewis6991/gitsigns.nvim'
+" git signs on neovim Plug 'lewis6991/gitsigns.nvim'
 
 " git operation on neovim
 Plug 'dinhhuy258/git.nvim'
@@ -20,6 +19,9 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 
 " colorscheme
 Plug 'folke/tokyonight.nvim'
+" Plug 'bluz71/vim-nightfly-colors', { 'as': 'nightfly' }
+" Plug 'ribru17/bamboo.nvim'
+" Plug 'sainnhe/everforest'
 
 " terminal window in vim 
 Plug 'voldikss/vim-floaterm'
@@ -50,17 +52,13 @@ Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-tree/nvim-web-devicons'
 
 " colorscheme
-Plug 'ellisonleao/gruvbox.nvim'
+" Plug 'ellisonleao/gruvbox.nvim'
 
 " tab complementation
 Plug 'ervandew/supertab'
 
 " markdown preview
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown']}
-
-
-" search code
-" call dein#add('jremmen/vim-ripgrep')
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 
 " commentary
 Plug 'tpope/vim-commentary'
@@ -68,17 +66,15 @@ Plug 'tpope/vim-commentary'
 " easy resizing of vim windows
 Plug 'simeji/winresizer'
 
-" fuzzy finder (fussy searching)
-" call dein#add('junegunn/fzf', {'build': './install --all'})
-" call dein#add('junegunn/fzf.vim')
-
 " UI for messages, cmdline and the popupmenu
 Plug 'folke/noice.nvim'
+" UI component library for neovim
 Plug 'MunifTanjim/nui.nvim'
+" A fancy, Configuration, notification manager for neovim
+Plug 'rcarriga/nvim-notify'
 
 " bufferline
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
-
 
 call plug#end()
 
@@ -123,6 +119,9 @@ nnoremap <ESC><ESC> :nohlsearch<CR>
 " time between insert and normal mode 
 set ttimeoutlen=10
 
+set encoding=utf-8
+set fileencodings+=utf-8
+
 
 
 " カーソルを縦棒にする
@@ -136,11 +135,20 @@ if has('vim_starting')
 endif
 
 " F3 key relative number display change
-nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
+" nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 
 
-" <F5>で編集中のファイルを実行
-nnoremap <F5> :!python3 %
+" <F5>で編集中のpythonファイルを実行
+autocmd FileType python nnoremap <F5> :!python3 %
+
+" <F5>で編集中のjavaファイルを実行
+function! JAVA_RUN()
+    " compile
+    !javac %
+    " execute
+    !java %:r
+endfunction
+autocmd FileType java nnoremap <F5> :execute JAVA_RUN()
 
 
 
@@ -287,6 +295,7 @@ inoremap ; :
 inoremap : ;
 
 
+colorscheme tokyonight-night
 
 
 let g:coc_disable_startup_warning = 1
@@ -328,7 +337,7 @@ lua << END
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'nightfly',
+    theme = 'tokyonight',
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {
@@ -378,9 +387,6 @@ let g:floaterm_keymap_prev   = '<F8>'
 let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F12>'
 
-colorscheme tokyonight-night
-
-
 
 
 " set plantuml server url" In your init.lua or init.vim
@@ -389,7 +395,7 @@ let g:preview_uml_url='http://localhost:8888'
 
 " markdownpreview config
 let g:mkdp_open_to_the_world = 1
-let g:mkdp_open_ip = '192.168.3.9' " change to you vps or vm ip
+let g:mkdp_open_ip = '192.168.3.9'
 let g:mkdp_port = 8080
 function! g:EchoUrl(url)
     :echo a:url
@@ -399,27 +405,22 @@ let g:mkdp_browserfunc = 'g:EchoUrl'
 
 
 " noice config
-lua << END
-require("noice").setup({
-  lsp = {
-    override = {
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-      ["vim.lsp.util.stylize_markdown"] = true,
-      ["cmp.entry.get_documentation"] = true,
-    },
-  },
-  presets = {
-    bottom_search = false, -- use a classic bottom cmdline for search
-    command_palette = true, -- position the cmdline and popupmenu together
-    long_message_to_split = true, -- long messages will be sent to a split
-    inc_rename = false, -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = false, -- add a border to hover docs and signature help
-  },
-})
-END
+" lua << END
+" require("noice").setup()
+" END
 
 
 " bufferline config
 lua << END
 require("bufferline").setup()
+vim.keymap.set('n', '<S-l>', '<CMD>BufferLineCycleNext<CR>')
+vim.keymap.set('n', '<S-h>', '<CMD>BufferLineCyclePrev<CR>')
 END
+
+
+" nvim-notify config
+" lua << END
+" require("notify").setup({
+"     timeout = 10000
+" })
+" END
